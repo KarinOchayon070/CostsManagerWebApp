@@ -13,30 +13,26 @@
   }
 } */
 
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
+.App-header {
+ margin: 15px;
+}
 
 .App-link {
   color: #61dafb;
 }
 
-.allPage{
+
+
+.App{
   background-color: #CBFEE2;
-  width: max-content;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .form{
-  width: 25vw;
-  height: 20vh;
+  width: 30vw;
+  height: 22vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,14 +42,17 @@
 
 .row input, .row select {
   width: 100%;
+  height: 100%;
   background-color: #CBFEE2;
   border-radius: 10px;
+  border-width: 1px;
   text-align: center;
   font-family: cursive;
+  font-size: 20px;
 }
 
 .row label{
-  width: 60%;
+  width: 70%;
 }
 
 .form-container {
@@ -68,21 +67,75 @@
 
 
 .row{
+  background-color: #CBFEE2;
   text-align: left;
   display: flex;
   justify-content: space-between;
   margin: 10px;
+  
 }
 
-.btnSubmit{
-  margin: 10px;
-  font-size: 20px;
-  border-radius: 10px;
-  text-align: center;
+/* Button submit style */
+.btnSubmit {
+  min-width: 300px;
+  min-height: 60px;
   font-family: cursive;
+  font-size: 22px;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  /* color: #313133; */
+  color: white;
+  background: #4d4d4d;
+  /* background:#92f2bd; */
+  border: none;
+  border-radius: 1000px;
+  /* box-shadow: 12px 12px 24px #1d633c; */
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  margin: 30px;
+  }
 
-}
+  button::before {
+      content: '';
+      border-radius: 1000px;
+      min-width: calc(3000px + 12px);
+      min-height: calc(60px + 12px);
+      /* box-shadow: 0 0 60px rgba(206, 244, 236, 0.64); */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: all .3s ease-in-out 0s;
+    }
+    
+    .btnSubmit:hover, .button:focus {
+      /* color: #313133; */
+      transform: translateY(-6px);
 
+    }
+    
+    button:hover::before, button:focus::before {
+      opacity: 0.5;
+    }
+    
+    button::after {
+      content: '';
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+  
+  
 
 /* @keyframes App-logo-spin {
   from {

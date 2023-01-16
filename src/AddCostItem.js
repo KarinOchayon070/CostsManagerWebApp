@@ -6,10 +6,10 @@ import header from "./header.png";
 
 const AddCostItem = () => {
   const [cost, setCost] = useState({
-    item_name: "Please enter item name",
+    item_name: "",
     sum: 0,
     category: "",
-    description: "Please enter item description",
+    description: "",
     purchaseDate: new Date(),
   });
 
@@ -21,33 +21,35 @@ const AddCostItem = () => {
   const [message, setMessage] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    let items = JSON.parse(localStorage.getItem("Items")) || [];
-    items.push(cost);
-    localStorage.setItem("Items", JSON.stringify(items));
-    setMessage("Item added successfully!");
-    setTimeout(() => {
-      setMessage("");
-      setCost({
-        item_name: "",
-        sum: 0,
-        category: "",
-        description: "",
-        purchaseDate: new Date(),
-      });
-    }, 4000);
+    if (cost.sum && cost.category && cost.description && cost.purchaseDate) {
+      let items = JSON.parse(localStorage.getItem("Items")) || [];
+      items.push(cost);
+      localStorage.setItem("Items", JSON.stringify(items));
+      setMessage("Item added successfully!");
+      setTimeout(() => {
+        setMessage("");
+        setCost({
+          item_name: "",
+          sum: 0,
+          category: "",
+          description: "",
+          purchaseDate: new Date(),
+        });
+      }, 4000);
+    } else {
+      setMessage("Please fill all the details before adding an item.");
+    }
   };
 
   const [purchaseDate, setPurchaseDate] = useState(new Date());
   const handleDateChange = (date) => {
     setPurchaseDate(date);
-    setCost({ ...cost, purchaseDate: date });
   };
 
   return (
     <div className="allPage">
       <div className="form-container">
         <header className="App-header">
-          {/* Costs Manager Web App */}
           <img src={header} className="App-logo" alt="logo" />
         </header>
         <form onSubmit={handleSubmit} className="form">
@@ -100,7 +102,6 @@ const AddCostItem = () => {
           <div className="row">
             <label>Purchase Date:</label>
             <input type="date" onChange={handleDateChange} />
-            {/* <DatePicker selected={purchaseDate} onChange={handleDateChange} /> */}
           </div>
 
           <button className="btnSubmit" type="submit">
