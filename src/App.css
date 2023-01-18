@@ -100,7 +100,7 @@
   outline: none;
   position: relative;
   padding: 10px;
-  margin: 30px;
+  margin: 10px;
   }
 
   button::before {
@@ -150,7 +150,7 @@
   }
 
   .reportTable th, .reportTable td{
-    border: 1px solid #ddd;
+    border: 1px solid #CBFEE2;
     padding: 8px;
   }
 
@@ -160,6 +160,9 @@
     font-weight: bold;
   }
   
+  .reportMessage{
+    margin: 20px;
+  }
 
 /* @keyframes App-logo-spin {
   from {

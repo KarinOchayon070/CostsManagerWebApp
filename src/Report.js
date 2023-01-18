@@ -62,19 +62,21 @@ const Report = () => {
         </div>
       </form>
       {/* <button onClick={handleGenerateReport}>Generate Report</button> */}
-      <table className="reportTable">
-        <thead>
-          <tr>
-            <th>Item Name</th>
-            <th>Sum</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Purchase Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {costs && costs.length > 0 ? (
-            costs.map((cost) => (
+      {costs.length === 0 ? (
+        <div> </div>
+      ) : (
+        <table className="reportTable">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Sum</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Purchase Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {costs.map((cost) => (
               <tr key={cost.item_name}>
                 <td>{cost.item_name}</td>
                 <td>{cost.sum}</td>
@@ -84,16 +86,14 @@ const Report = () => {
                   <td>{new Date(cost.purchaseDate).toLocaleDateString()}</td>
                 </code>{" "}
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td>No data available</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {costs.length === 0 && month && year ? (
+        <div className="reportMessage">No data available</div>
+      ) : null}
     </div>
   );
 };
-
 export default Report;
