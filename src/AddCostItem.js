@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import header from "./header.png";
 import LocalStorage from "./LocalStorage";
-import { Link } from "react-router-dom";
 import Report from "./Report";
-import { Route, BrowserRouter as Router } from "react-router-dom";
 import moment from "moment";
 
 const AddCostItem = () => {
@@ -38,22 +35,22 @@ const AddCostItem = () => {
           purchaseDate: moment(purchaseDate).format("YYYY-MM-DD"),
         });
         setMessage("Item added successfully!");
-        setTimeout(() => {
-          setMessage("");
-          setCost({
-            item_name: "",
-            sum: 0,
-            category: "",
-            description: "",
-            purchaseDate: new Date(),
-          });
-        }, 4000);
       } catch (error) {
         setMessage("An error occurred while adding the item.");
       }
     } else {
       setMessage("Please fill all the details before adding an item.");
     }
+    setTimeout(() => {
+      setMessage("");
+      setCost({
+        item_name: "",
+        sum: 0,
+        category: "",
+        description: "",
+        purchaseDate: new Date(),
+      });
+    }, 4000);
   };
 
   const [purchaseDate, setPurchaseDate] = useState(new Date());
@@ -116,10 +113,11 @@ const AddCostItem = () => {
             <input type="date" onChange={handleDateChange} />
           </div>
           <div className="message">{message}</div>
-          <button className="btnSubmit" type="submit">
+          <button className="btnSubmit" onClick={handleSubmit}>
             Add Item
           </button>
           <button
+            type="button"
             className="btnGenerateReport"
             onClick={handleReportButtonClick}
           >
