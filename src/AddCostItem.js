@@ -25,6 +25,12 @@ const AddCostItem = () => {
     setShowReport(true);
   };
 
+  const [purchaseDate, setPurchaseDate] = useState(new Date());
+  const handleDateChange = (event) => {
+    const date = event.target.value;
+    setPurchaseDate(date);
+  };
+
   const [message, setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,6 +49,7 @@ const AddCostItem = () => {
     }
     setTimeout(() => {
       setMessage("");
+      // setPurchaseDate(moment(new Date()).format("YYYY-MM-DD"));
       setCost({
         item_name: "",
         sum: 0,
@@ -51,12 +58,6 @@ const AddCostItem = () => {
         purchaseDate: new Date(),
       });
     }, 4000);
-  };
-
-  const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const handleDateChange = (event) => {
-    const date = event.target.value;
-    setPurchaseDate(date);
   };
 
   return (
