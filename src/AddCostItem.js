@@ -3,6 +3,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import header from "./header.png";
+import LocalStorage from "./LocalStorage";
+import { Link } from "react-router-dom";
+import Report from "./Report";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import moment from "moment";
 
 const AddCostItem = () => {
   const [cost, setCost] = useState({
@@ -18,31 +23,42 @@ const AddCostItem = () => {
     setCost({ ...cost, [name]: value });
   };
 
+  const [showReport, setShowReport] = useState(false);
+  const handleReportButtonClick = () => {
+    setShowReport(true);
+  };
+
   const [message, setMessage] = useState("");
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (cost.sum && cost.category && cost.description && cost.purchaseDate) {
-      let items = JSON.parse(localStorage.getItem("Items")) || [];
-      items.push(cost);
-      localStorage.setItem("Items", JSON.stringify(items));
-      setMessage("Item added successfully!");
-      setTimeout(() => {
-        setMessage("");
-        setCost({
-          item_name: "",
-          sum: 0,
-          category: "",
-          description: "",
-          purchaseDate: new Date(),
+      try {
+        await LocalStorage.addCost({
+          ...cost,
+          purchaseDate: moment(purchaseDate).format("YYYY-MM-DD"),
         });
-      }, 4000);
+        setMessage("Item added successfully!");
+        setTimeout(() => {
+          setMessage("");
+          setCost({
+            item_name: "",
+            sum: 0,
+            category: "",
+            description: "",
+            purchaseDate: new Date(),
+          });
+        }, 4000);
+      } catch (error) {
+        setMessage("An error occurred while adding the item.");
+      }
     } else {
       setMessage("Please fill all the details before adding an item.");
     }
   };
 
   const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const handleDateChange = (date) => {
+  const handleDateChange = (event) => {
+    const date = event.target.value;
     setPurchaseDate(date);
   };
 
@@ -62,7 +78,6 @@ const AddCostItem = () => {
               onChange={handleInputChange}
             />
           </div>
-
           <div className="row">
             <label>Description:</label>
             <input
@@ -72,7 +87,6 @@ const AddCostItem = () => {
               onChange={handleInputChange}
             />
           </div>
-
           <div className="row">
             <label>Sum:</label>
             <input
@@ -82,7 +96,6 @@ const AddCostItem = () => {
               onChange={handleInputChange}
             />
           </div>
-
           <div className="row">
             <label>Category:</label>
             <select
@@ -98,17 +111,21 @@ const AddCostItem = () => {
               <option value="other">Other</option>
             </select>
           </div>
-
           <div className="row">
             <label>Purchase Date:</label>
             <input type="date" onChange={handleDateChange} />
           </div>
-
+          <div className="message">{message}</div>
           <button className="btnSubmit" type="submit">
             Add Item
           </button>
-
-          <div>{message}</div>
+          <button
+            className="btnGenerateReport"
+            onClick={handleReportButtonClick}
+          >
+            Generate Report
+          </button>
+          {showReport ? <Report /> : null}
         </form>
       </div>
     </div>
