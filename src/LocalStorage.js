@@ -13,6 +13,16 @@ const LocalStorage = {
     console.log(costsForMonthAndYear.length);
     return costsForMonthAndYear;
   },
+
+  async getCostsByYear(year) {
+    const allCosts = JSON.parse(localStorage.getItem("costs")) || [];
+    const costsForYear = allCosts.filter((cost) => {
+      const costDate = new Date(cost.purchaseDate);
+      return costDate.getFullYear() === parseInt(year);
+    });
+    return costsForYear;
+  },
+
   async addCost(cost) {
     let allCosts = JSON.parse(localStorage.getItem("costs")) || [];
     allCosts.push({ ...cost, purchaseDate: new Date(cost.purchaseDate) });

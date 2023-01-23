@@ -17,19 +17,29 @@ const Report = () => {
 
   useEffect(() => {
     if (month && year) {
-      handleGenerateReport();
+      if (month === "12") {
+        for (let i = 0; i < 12; i++) {
+          handleGenerateReport(i);
+        }
+      } else {
+        handleGenerateReport(month);
+      }
     }
   }, [month, year]);
 
   const handleGenerateReport = async () => {
     try {
-      const costsForMonthAndYear = await LocalStorage.getCostsByMonthAndYear(
-        month,
-        year
-      );
+      let costsForMonthAndYear = [];
+      if (month === "12") {
+        costsForMonthAndYear = await LocalStorage.getCostsByYear(year);
+      } else {
+        costsForMonthAndYear = await LocalStorage.getCostsByMonthAndYear(
+          month,
+          year
+        );
+      }
       console.log(costsForMonthAndYear);
       setCosts(costsForMonthAndYear);
-      console.log(costs); // After setCosts
     } catch (error) {
       console.error(error);
     }
@@ -54,6 +64,7 @@ const Report = () => {
             <option value="9">October</option>
             <option value="10">November</option>
             <option value="11">December</option>
+            <option value="12">All Months</option>
           </select>
         </div>
         <div className="row">
