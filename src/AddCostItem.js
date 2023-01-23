@@ -74,6 +74,7 @@ const AddCostItem = () => {
               name="item_name"
               value={cost.item_name}
               onChange={handleInputChange}
+              autocomplete="off"
             />
           </div>
           <div className="row">
@@ -83,6 +84,7 @@ const AddCostItem = () => {
               name="description"
               value={cost.description}
               onChange={handleInputChange}
+              autocomplete="off"
             />
           </div>
           <div className="row">
