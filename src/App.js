@@ -5,6 +5,7 @@ import Report from "./Report";
 import header from "./header.png";
 import LocalStorage from "./LocalStorage";
 import moment from "moment";
+import { fallingCoinAnimation } from "./fallingCoinAnimation";
 
 const currentDate = new Date();
 
@@ -60,6 +61,8 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    fallingCoinAnimation();
+
     if (cost.sum && cost.category && cost.description && cost.purchaseDate) {
       try {
         await LocalStorage.addCost({
@@ -83,6 +86,9 @@ function App() {
     });
 
     setTimeout(() => {
+      const fallingCoinsElement = document.getElementById("gimmick");
+      fallingCoinsElement.parentNode.removeChild(fallingCoinsElement);
+
       setMessage("");
       setCost({
         item_name: "",
@@ -91,7 +97,7 @@ function App() {
         description: "",
         purchaseDate: new Date(),
       });
-    }, 4000);
+    }, 7000);
   };
 
   return (
