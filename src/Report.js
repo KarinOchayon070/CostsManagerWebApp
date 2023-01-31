@@ -1,56 +1,17 @@
-import React, { useState } from "react";
-import LocalStorage from "./LocalStorage";
-import { useEffect } from "react";
+import React from "react";
 
-const Report = () => {
-  const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
-  const [costs, setCosts] = useState([]);
-
-  const handleMonthChange = (event) => {
-    setMonth(event.target.value);
-  };
-
-  const handleYearChange = (event) => {
-    setYear(event.target.value);
-  };
-
-  useEffect(() => {
-    if (month && year) {
-      if (month === "12") {
-        for (let i = 0; i < 12; i++) {
-          handleGenerateReport(i);
-        }
-      } else {
-        handleGenerateReport(month);
-      }
-    }
-  }, [month, year]);
-
-  const handleGenerateReport = async () => {
-    try {
-      let costsForMonthAndYear = [];
-      if (month === "12") {
-        costsForMonthAndYear = await LocalStorage.getCostsByYear(year);
-      } else {
-        costsForMonthAndYear = await LocalStorage.getCostsByMonthAndYear(
-          month,
-          year
-        );
-      }
-      console.log(costsForMonthAndYear);
-      setCosts(costsForMonthAndYear);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+const Report = ({ costs, reportDate, handleReportDateChange }) => {
   return (
-    <div>
+    <div className="report">
       <form className="generateReportForm">
-        <div className="row">
+        <div className="column">
           <label>Month:</label>
-          <select onChange={handleMonthChange}>
+          <select
+            name="month"
+            className="customInput"
+            value={reportDate.month}
+            onChange={handleReportDateChange}
+          >
             <option value="">Select a month</option>
             <option value="0">January</option>
             <option value="1">February</option>
@@ -67,32 +28,36 @@ const Report = () => {
             <option value="12">All Months</option>
           </select>
         </div>
-        <div className="row">
+        <div className="column">
           <label>Year:</label>
-          <input type="number" onChange={handleYearChange} />
+          <input
+            name="year"
+            type="number"
+            className="customInput"
+            value={reportDate.year}
+            onChange={handleReportDateChange}
+          />
         </div>
       </form>
-      {/* <button onClick={handleGenerateReport}>Generate Report</button> */}
-      {costs.length === 0 ? (
-        <div> </div>
-      ) : (
+
+      <div className="reportTableContainer">
         <table className="reportTable">
           <thead>
             <tr>
               <th>Item Name</th>
+              <th>Description</th>
               <th>Sum</th>
               <th>Category</th>
-              <th>Description</th>
               <th>Purchase Date</th>
             </tr>
           </thead>
           <tbody>
             {costs.map((cost) => (
-              <tr key={cost.item_name}>
+              <tr key={`${cost.item_name}+${cost.description}`}>
                 <td>{cost.item_name}</td>
+                <td>{cost.description}</td>
                 <td>{cost.sum}</td>
                 <td>{cost.category}</td>
-                <td>{cost.description}</td>
                 <code>
                   <td>{new Date(cost.purchaseDate).toLocaleDateString()}</td>
                 </code>{" "}
@@ -100,11 +65,10 @@ const Report = () => {
             ))}
           </tbody>
         </table>
-      )}
-      {costs.length === 0 && month && year ? (
-        <div className="reportMessage">No data available</div>
-      ) : null}
+        {costs.length === 0 && <div className="message">No data available</div>}
+      </div>
     </div>
   );
 };
+
 export default Report;
