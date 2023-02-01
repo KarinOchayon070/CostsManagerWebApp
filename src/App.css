@@ -22,6 +22,8 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+
 }
 
 .app > header{
