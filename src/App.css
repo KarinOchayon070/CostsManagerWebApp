@@ -36,6 +36,7 @@ main{
   padding: 0 50px ;
 }
 
+
 .separator{
   height:100%;
   width:10px;
@@ -91,7 +92,6 @@ main{
 
 
 /* Each label and input / label and select have to be in the same line. That's why we gave it the className "row" */
-
 .row {
   background-color: #cbfee2;
   text-align: left;

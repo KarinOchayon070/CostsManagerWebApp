@@ -1,3 +1,8 @@
+/*
+This file is a util file - an animation of falling coins taken from the internet.
+The animation will only be activated when a user adds an item.
+*/
+
 export function fallingCoinAnimation() {
   var exists = document.getElementById("gimmick");
   if (exists) {

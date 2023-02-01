@@ -1,5 +1,13 @@
 import React from "react";
 
+/*
+This file is a component that has two fields - month and year.
+The initial and deductive value of these two fields is the current month and year.
+Also, a table of expenses is always displayed - in which the user's expenses for the current month and year are displayed.
+If the user's expenses have not yet been entered - the information will not be displayed in the table, and the user will be notified of this.
+When a user changes the month and/or year - a table is shown to him for the month and/or year he entered.
+*/
+
 const Report = ({ costs, reportDate, handleReportDateChange }) => {
   return (
     <div className="report">
@@ -33,6 +41,7 @@ const Report = ({ costs, reportDate, handleReportDateChange }) => {
           <input
             name="year"
             type="number"
+            min="0"
             className="customInput"
             value={reportDate.year}
             onChange={handleReportDateChange}
@@ -46,17 +55,19 @@ const Report = ({ costs, reportDate, handleReportDateChange }) => {
             <tr>
               <th>Item Name</th>
               <th>Description</th>
-              <th>Sum</th>
+              <th>Price</th>
+              <th>Amount</th>
               <th>Category</th>
               <th>Purchase Date</th>
             </tr>
           </thead>
           <tbody>
             {costs.map((cost) => (
-              <tr key={`${cost.item_name}+${cost.description}`}>
+              <tr key={cost.id}>
                 <td>{cost.item_name}</td>
                 <td>{cost.description}</td>
-                <td>{cost.sum}</td>
+                <td>{cost.price}₪</td>
+                <td>{cost.amount}</td>
                 <td>{cost.category}</td>
                 <code>
                   <td>{new Date(cost.purchaseDate).toLocaleDateString()}</td>
