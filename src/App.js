@@ -1,11 +1,16 @@
+/*
+Project name: "Spent It Right".
+Project team: Karin Ochayon - 207797002, Dor Uzan - 205890510.
+*/
+
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import AddCostItem from "./AddCostItem";
 import Report from "./Report";
 import header from "./header.png";
-import localStorageMethods from "./localStorageMethods";
+import localstorage from "./localstorage";
 import moment from "moment";
-import { fallingCoinAnimation } from "./fallingCoinAnimation";
+import animations from "./animations";
 
 /*
 This file contains the logic from the two components - "AddCostItem", "Report" and from the util file "localStorage".
@@ -17,7 +22,7 @@ Therefore, we needed a "parent" to link the two children - so the logic is prese
 const currentDate = new Date();
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [costs, setCosts] = useState([]);
   const [reportDate, setReportDate] = useState({
     year: currentDate.getFullYear(),
@@ -26,9 +31,9 @@ function App() {
   const [cost, setCost] = useState({
     amount: 0,
     price: 0,
-    category: "",
-    item_name: "",
-    description: "",
+    category: '',
+    item_name: '',
+    description: '',
     purchaseDate: new Date(),
   });
 
@@ -49,14 +54,14 @@ function App() {
   const handleGenerateReport = async () => {
     try {
       let costsForMonthAndYear = [];
-      if (reportDate.month === "12") {
+      if (reportDate.month === '12') {
         /*If the user wants a financial expense report for the entire year, and not just for a specific month*/
-        costsForMonthAndYear = await localStorageMethods.getCostsByYear(
+        costsForMonthAndYear = await localstorage.getCostsByYear(
           reportDate.year
         );
       } else {
         /*If the user wants a financial expense report for a specific month & year*/
-        costsForMonthAndYear = await localStorageMethods.getCostsByMonthAndYear(
+        costsForMonthAndYear = await localstorage.getCostsByMonthAndYear(
           reportDate.month,
           reportDate.year
         );
@@ -71,7 +76,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     /*If the user filled in all the fields correctly - enter the information to the localStorage, expenses table and inform the user
-     that the item was successfully added. Else, let the user know he didn't fill all the fields*/
+     that the item was successfully added. Else, let the user know he didn't fill all the fields/an error occurred while adding the item*/
     if (
       cost.price &&
       cost.category &&
@@ -80,18 +85,18 @@ function App() {
       cost.amount
     ) {
       try {
-        fallingCoinAnimation();
-        await localStorageMethods.addCost({
+        animations.fallingcoinanimation();
+        await localstorage.addCost({
           ...cost,
-          purchaseDate: moment(cost.purchaseDate).format("YYYY-MM-DD"),
+          purchaseDate: moment(cost.purchaseDate).format('YYYY-MM-DD'),
         });
 
-        setMessage("Item added successfully!");
+        setMessage('Item added successfully!');
       } catch (error) {
-        setMessage("An error occurred while adding the item");
+        setMessage('An error occurred while adding the item');
       }
     } else {
-      setMessage("Please fill all the details before adding an item");
+      setMessage('Please fill all the details before adding an item');
     }
 
     const date = new Date(cost.purchaseDate);
@@ -107,25 +112,25 @@ function App() {
     */
 
     setTimeout(() => {
-      const fallingCoinsElement = document.getElementById("gimmick");
+      const fallingCoinsElement = document.getElementById('gimmick');
       fallingCoinsElement.parentNode.removeChild(fallingCoinsElement);
 
-      setMessage("");
+      setMessage('');
       setCost({
-        item_name: "",
+        item_name: '',
         price: 0,
         amount: 0,
-        category: "",
-        description: "",
+        category: '',
+        description: '',
         purchaseDate: new Date(),
       });
     }, 5000);
   };
 
   return (
-    <div className="app">
+    <div className='app'>
       <header>
-        <img src={header} alt="logo" />
+        <img src={header} alt='logo' />
       </header>
 
       <main>
@@ -135,7 +140,7 @@ function App() {
           handleSubmit={handleSubmit}
           handleInputChange={handleInputChange}
         />
-        <div className="separator" />
+        <div className='separator' />
         <Report
           costs={costs}
           reportDate={reportDate}

@@ -1,3 +1,8 @@
+/*
+Project name: "Spent It Right".
+Project team: Karin Ochayon - 207797002, Dor Uzan - 205890510.
+*/
+
 import React from "react";
 
 /*
@@ -10,47 +15,47 @@ When a user changes the month and/or year - a table is shown to him for the mont
 
 const Report = ({ costs, reportDate, handleReportDateChange }) => {
   return (
-    <div className="report">
-      <form className="generateReportForm">
-        <div className="column">
+    <div className='report'>
+      <form className='generateReportForm'>
+        <div className='column'>
           <label>Month:</label>
           <select
-            name="month"
-            className="customInput"
+            name='month'
+            className='customInput'
             value={reportDate.month}
             onChange={handleReportDateChange}
           >
-            <option value="">Select a month</option>
-            <option value="0">January</option>
-            <option value="1">February</option>
-            <option value="2">March</option>
-            <option value="3">April</option>
-            <option value="4">May</option>
-            <option value="5">June</option>
-            <option value="6">July</option>
-            <option value="7">August</option>
-            <option value="8">September</option>
-            <option value="9">October</option>
-            <option value="10">November</option>
-            <option value="11">December</option>
-            <option value="12">All Months</option>
+            <option value=''>Select a month</option>
+            <option value='0'>January</option>
+            <option value='1'>February</option>
+            <option value='2'>March</option>
+            <option value='3'>April</option>
+            <option value='4'>May</option>
+            <option value='5'>June</option>
+            <option value='6'>July</option>
+            <option value='7'>August</option>
+            <option value='8'>September</option>
+            <option value='9'>October</option>
+            <option value='10'>November</option>
+            <option value='11'>December</option>
+            <option value='12'>All Months</option>
           </select>
         </div>
-        <div className="column">
+        <div className='column'>
           <label>Year:</label>
           <input
-            name="year"
-            type="number"
-            min="0"
-            className="customInput"
+            name='year'
+            type='number'
+            min='0'
+            className='customInput'
             value={reportDate.year}
             onChange={handleReportDateChange}
           />
         </div>
       </form>
 
-      <div className="reportTableContainer">
-        <table className="reportTable">
+      <div className='reportTableContainer'>
+        <table className='reportTable'>
           <thead>
             <tr>
               <th>Item Name</th>
@@ -76,7 +81,7 @@ const Report = ({ costs, reportDate, handleReportDateChange }) => {
             ))}
           </tbody>
         </table>
-        {costs.length === 0 && <div className="message">No data available</div>}
+        {costs.length === 0 && <div className='message'>No data available</div>}
       </div>
     </div>
   );

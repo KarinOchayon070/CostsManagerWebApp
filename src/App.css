@@ -1,3 +1,8 @@
+/*
+Project name: "Spent It Right".
+Project team: Karin Ochayon - 207797002, Dor Uzan - 205890510.
+*/
+
 /* =====================================================General=================================================================== */
 
 #gimmick {
@@ -7,7 +12,6 @@
   top:0;
   left:0;
 }
-
 
 body {
   margin: 0;
@@ -23,7 +27,6 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
 }
 
 .app > header{
@@ -37,7 +40,6 @@ main{
   height: 50%;
   padding: 0px 50px ;
 }
-
 
 .separator{
   height:100%;
@@ -56,10 +58,8 @@ main{
   font-size: 20px;
   padding: 5px 0px;
   font-family: cursive;
-
 }
 
-/* Button submit style */
 .btnSubmit {
   width:40%;
   font-size: 22px;
@@ -74,7 +74,6 @@ main{
   position: relative;
   padding: 10px;
   font-family: cursive;
-
 }
 
 .btnSubmit:hover {
@@ -103,11 +102,9 @@ main{
   align-items: center;
 }
 
-
 .row label {
   width: 70%;
 }
-
 
 .message {
   text-align: center;
