@@ -139,7 +139,7 @@ main{
 }
 
 .reportTableContainer{
-  height:100%;
+  height:80%;
   overflow-y: auto;
 }
 

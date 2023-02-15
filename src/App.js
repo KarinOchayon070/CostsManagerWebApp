@@ -36,11 +36,15 @@ function App() {
     description: '',
     purchaseDate: new Date(),
   });
+  /* These lines of code filter an array of "costs" objects based on a given month and year, and then calculate the total expenses
+   for the remaining objects in the filtered array. The result of the total expenses calculation is stored in the "totalExpenses" variable.*/
+  const totalExpenses = costs.reduce((total, costObject) =>  total + Number(costObject.price), 0);
 
   useEffect(() => {
     handleGenerateReport();
   }, [reportDate]);
 
+ 
   const handleReportDateChange = (event) => {
     const { name, value } = event.target;
     setReportDate({ ...reportDate, [name]: value });
@@ -66,10 +70,9 @@ function App() {
           reportDate.year
         );
       }
-
       setCosts(costsForMonthAndYear);
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -145,6 +148,7 @@ function App() {
           costs={costs}
           reportDate={reportDate}
           handleReportDateChange={handleReportDateChange}
+          totalExpenses={totalExpenses}
         />
       </main>
     </div>

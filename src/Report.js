@@ -5,6 +5,7 @@ Project team: Karin Ochayon - 207797002, Dor Uzan - 205890510.
 
 import React from "react";
 
+
 /*
 This file is a component that has two fields - month and year.
 The initial and deductive value of these two fields is the current month and year.
@@ -13,7 +14,12 @@ If the user's expenses have not yet been entered - the information will not be d
 When a user changes the month and/or year - a table is shown to him for the month and/or year he entered.
 */
 
-const Report = ({ costs, reportDate, handleReportDateChange }) => {
+const Report = ({
+  costs,
+  reportDate,
+  handleReportDateChange,
+  totalExpenses,
+}) => {
   return (
     <div className='report'>
       <form className='generateReportForm'>
@@ -54,7 +60,7 @@ const Report = ({ costs, reportDate, handleReportDateChange }) => {
         </div>
       </form>
 
-      <div className='reportTableContainer'>
+  {!!totalExpenses && <div className='reportTableContainer'>
         <table className='reportTable'>
           <thead>
             <tr>
@@ -76,13 +82,15 @@ const Report = ({ costs, reportDate, handleReportDateChange }) => {
                 <td>{cost.category}</td>
                 <code>
                   <td>{new Date(cost.purchaseDate).toLocaleDateString()}</td>
-                </code>{" "}
+                </code>{''}
               </tr>
             ))}
           </tbody>
         </table>
-        {costs.length === 0 && <div className='message'>No data available</div>}
-      </div>
+      </div>}
+        <div className='message'>
+          Total Expenses For The Selected Date: {totalExpenses.toFixed(2)}₪
+        </div>
     </div>
   );
 };
