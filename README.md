@@ -11,7 +11,7 @@ Hey guys!
 
 💰 Each user can issue an expense report by year and month.
 
-💰 Live server - https://spent-it-right.onrender.com.
+💰 Live webSite - https://spent-it-right.onrender.com.
 
 💰 Watch our demo video on YouTube - https://www.youtube.com/watch?v=lU_Cgxo1C9s&ab_channel=KarinOchayon.
 
