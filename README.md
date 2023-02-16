@@ -13,7 +13,7 @@ Hey guys!
 
 💰 Live server - https://spent-it-right.onrender.com.
 
-💰 Watch our demo video on YouTube: https://www.youtube.com/watch?v=lU_Cgxo1C9s&ab_channel=KarinOchayon.
+💰 Watch our demo video on YouTube - https://www.youtube.com/watch?v=lU_Cgxo1C9s&ab_channel=KarinOchayon.
 
 ![image](https://user-images.githubusercontent.com/92684210/219342103-3063318e-24bb-4d4a-9e3e-b3092b9e68a2.png)
 
