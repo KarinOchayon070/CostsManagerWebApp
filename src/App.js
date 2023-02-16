@@ -36,15 +36,14 @@ function App() {
     description: '',
     purchaseDate: new Date(),
   });
-  /* These lines of code filter an array of "costs" objects based on a given month and year, and then calculate the total expenses
-   for the remaining objects in the filtered array. The result of the total expenses calculation is stored in the "totalExpenses" variable.*/
+
+  /* Calculate the total expenses*/
   const totalExpenses = costs.reduce((total, costObject) =>  total + Number(costObject.price), 0);
 
   useEffect(() => {
     handleGenerateReport();
   }, [reportDate]);
 
- 
   const handleReportDateChange = (event) => {
     const { name, value } = event.target;
     setReportDate({ ...reportDate, [name]: value });
@@ -113,11 +112,9 @@ function App() {
     After the item has been successfully added, the animation will be performed and after 5 seconds -
     all the fields will be reset and the animation will stop.
     */
-
     setTimeout(() => {
       const fallingCoinsElement = document.getElementById('gimmick');
       fallingCoinsElement.parentNode.removeChild(fallingCoinsElement);
-
       setMessage('');
       setCost({
         item_name: '',
@@ -135,7 +132,6 @@ function App() {
       <header>
         <img src={header} alt='logo' />
       </header>
-
       <main>
         <AddCostItem
           cost={cost}

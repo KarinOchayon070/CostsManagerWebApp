@@ -5,13 +5,14 @@ Project team: Karin Ochayon - 207797002, Dor Uzan - 205890510.
 
 import React from "react";
 
-
 /*
 This file is a component that has two fields - month and year.
 The initial and deductive value of these two fields is the current month and year.
 Also, a table of expenses is always displayed - in which the user's expenses for the current month and year are displayed.
 If the user's expenses have not yet been entered - the information will not be displayed in the table, and the user will be notified of this.
 When a user changes the month and/or year - a table is shown to him for the month and/or year he entered.
+The user will be shown at the bottom of the table the amount of total expenses for the selected date.
+If no expenses were entered for this month - the amount will of course be 0.
 */
 
 const Report = ({
